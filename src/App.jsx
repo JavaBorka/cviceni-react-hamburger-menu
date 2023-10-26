@@ -1,25 +1,45 @@
+import { useState } from 'react';
 import './App.css';
 
-const MenuItem = (props) => {
+const MenuItem = ({text, onSelect}) => {
   return (
-    <a href="#" className="menu-item">
-      {props.text}
+    <a 
+      href="#"
+      className="menu-item"
+      onClick={() => {
+        onSelect()
+      }}
+    >
+      {text}
     </a>
   );
 };
 
 const App = () => {
+
+  const[menuOpened, setMenuOpened] = useState(false)
+
+  const handleSelectItem = () => {
+    setMenuOpened(false)
+  }
+
   return (
     <>
       <header>
-        <div className="menu">
-          <button className="menu__btn"></button>
+        <div className={menuOpened ? "menu" : "menu--closed"}>
+          <button 
+            className="menu__btn"
+            onClick={() => {
+              setMenuOpened(!menuOpened)
+            }}
+          >            
+          </button>
           <div className="menu__items">
-            <MenuItem text="Domů" />
-            <MenuItem text="Naše nabídka" />
-            <MenuItem text="Náš tým" />
-            <MenuItem text="Blog" />
-            <MenuItem text="Kontakt" />
+            <MenuItem text="Domů" onSelect={handleSelectItem} />
+            <MenuItem text="Naše nabídka" onSelect={handleSelectItem} />
+            <MenuItem text="Náš tým" onSelect={handleSelectItem}/>
+            <MenuItem text="Blog" onSelect={handleSelectItem} />
+            <MenuItem text="Kontakt" onSelect={handleSelectItem} />
           </div>
         </div>
       </header>
