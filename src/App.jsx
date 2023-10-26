@@ -7,7 +7,7 @@ const MenuItem = ({text, onSelect}) => {
       href="#"
       className="menu-item"
       onClick={() => {
-        onSelect()
+        onSelect(text)
       }}
     >
       {text}
@@ -18,9 +18,11 @@ const MenuItem = ({text, onSelect}) => {
 const App = () => {
 
   const[menuOpened, setMenuOpened] = useState(false)
+  const [title, setTitle] = useState('')
 
-  const handleSelectItem = () => {
+  const handleSelectItem = (text) => {
     setMenuOpened(false)
+    setTitle(text)
   }
 
   return (
@@ -44,7 +46,7 @@ const App = () => {
         </div>
       </header>
       <main>
-        <h1>Domů</h1>
+        <h1>{title}</h1>
       </main>
     </>
   );
